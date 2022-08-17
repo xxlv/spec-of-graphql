@@ -4,13 +4,11 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "b": "spec-md ./md/*.md > ./out/index.html",
-    "live":"live-server --open=out --watch=./out/index.html"
+    "b": "spec-md ./md/*.md > ./index.html",
+    "live": "live-server --open=out --watch=./index.html"
   },
-
   "devDependencies": {
-    "spec-md": "^3.0.2",
-    "live-server": "^1.2.0"
-
+    "live-server": "^1.1.0",
+    "spec-md": "^3.0.2"
   }
 }

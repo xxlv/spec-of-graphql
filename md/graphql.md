@@ -1,4 +1,4 @@
-#  GraphQL in Shopline Spec 
+#  GraphQL Spec 
 ## 类型->Type 
 ### 类型定义->Type Definition
 
@@ -540,7 +540,7 @@ Note:
 
 
 Example:
-    gid://shopline/Product/1
+    gid://okuer/Product/1
     
 ###### 子域
 真实场景中，我们的团队往往分为子域。因此 `$domain` 可以具体到子域。
