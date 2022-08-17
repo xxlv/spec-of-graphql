@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<!-- Built with spec-md https://spec-md.com -->
+<html>
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"><title>GraphQL in Shopline Spec</title>
+<style>/** * prism.js default theme for JavaScript, CSS and HTML * Based on dabblet (http://dabblet.com) * @author Lea Verou */ code[class*="language-"], pre[class*="language-"] { 	color: black; 	background: none; 	text-shadow: 0 1px white; 	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace; 	font-size: 1em; 	text-align: left; 	white-space: pre; 	word-spacing: normal; 	word-break: normal; 	word-wrap: normal; 	line-height: 1.5; 	-moz-tab-size: 4; 	-o-tab-size: 4; 	tab-size: 4; 	-webkit-hyphens: none; 	-moz-hyphens: none; 	-ms-hyphens: none; 	hyphens: none; } pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection, code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection { 	text-shadow: none; 	background: #b3d4fc; } pre[class*="language-"]::selection, pre[class*="language-"] ::selection, code[class*="language-"]::selection, code[class*="language-"] ::selection { 	text-shadow: none; 	background: #b3d4fc; } @media print { 	code[class*="language-"], 	pre[class*="language-"] { 		text-shadow: none; 	} } /* Code blocks */ pre[class*="language-"] { 	padding: 1em; 	margin: .5em 0; 	overflow: auto; } :not(pre) > code[class*="language-"], pre[class*="language-"] { 	background: #f5f2f0; } /* Inline code */ :not(pre) > code[class*="language-"] { 	padding: .1em; 	border-radius: .3em; 	white-space: normal; } .token.comment, .token.prolog, .token.doctype, .token.cdata { 	color: slategray; } .token.punctuation { 	color: #999; } .token.namespace { 	opacity: .7; } .token.property, .token.tag, .token.boolean, .token.number, .token.constant, .token.symbol, .token.deleted { 	color: #905; } .token.selector, .token.attr-name, .token.string, .token.char, .token.builtin, .token.inserted { 	color: #690; } .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string { 	color: #9a6e3a; 	/* This background color was intended by the author of this theme. */ 	background: hsla(0, 0%, 100%, .5); } .token.atrule, .token.attr-value, .token.keyword { 	color: #07a; } .token.function, .token.class-name { 	color: #DD4A68; } .token.regex, .token.important, .token.variable { 	color: #e90; } .token.important, .token.bold { 	font-weight: bold; } .token.italic { 	font-style: italic; } .token.entity { 	cursor: help; }</style>
+<style>:root{color:#333;font-family:Cambria,"Palatino Linotype",Palatino,"Liberation Serif",serif;font-size:15px;line-height:1.5;--mono-font-size: 13px;--indent: 1rem;--list-indent: 1.5rem;--dfn-indent: 0rem}@media (min-width: 720px){:root{font-size:17px;--mono-font-size: 15px;--indent: 2rem;--list-indent: 2rem;--dfn-indent: 2rem}}body{margin:3rem 0 3rem}article{margin:0 1rem}@media (min-width: 720px){body{margin:6rem auto 3rem;max-width:800px;padding-left:75px;padding-right:clamp(0px,calc((100vw - 800px) * .25),75px)}}.source-link{display:none}@media screen and (min-width: 720px){.source-link{display:block;position:absolute;width:18px;fill:#ccc;opacity:.3}.source-link:hover{opacity:1}}.outdated-selection-link,.selection-link{position:absolute;display:block;color:#fff;--selection-background-color: #cacee0;background:var(--selection-background-color);border-radius:4px;font-size:36px;height:23px;line-height:48px;text-align:center;text-decoration:none;width:25px;user-select:none;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none}.outdated-selection-link:hover,.selection-link:hover{text-decoration:none}.outdated-selection-link:before,.selection-link:before{border:5px solid transparent;content:"";height:0;margin-top:-5px;margin-right:-5px;position:absolute;right:1px;top:50%;width:0}@media (max-width: 719px){.outdated-selection-link:before,.selection-link:before{border-bottom-color:var(--selection-background-color);border-top:0;right:50%;top:1px}}@media (min-width: 720px){.outdated-selection-link:before,.selection-link:before{border-left-color:var(--selection-background-color);border-right:0;right:1px;top:50%}}.selection-link:hover{--selection-background-color: #3b5998}.outdated-selection-link{--selection-background-color: #f0babe;font-size:21px;font-weight:800;line-height:27px}.outdated-selection-link:hover:after{content:"This selection content has changed since this link was created.";font:9pt/11pt Cambria,"Palatino Linotype",Palatino,"Liberation Serif",serif;position:absolute;display:block;white-space:nowrap;padding:2px 5px 1px;top:-20px;background:black;color:#fff}a{color:#3b5998;text-decoration:none}a:hover{text-decoration:underline}img{max-width:100%}dl{margin:1rem 0 1rem var(--dfn-indent)}dd{margin:.25em 0 .5em var(--indent)}dd+dd{margin-top:1rem}dfn,.spec-ref{font-style:italic}dfn>a,.spec-ref>a{color:inherit}h1,h2,h3,h4,h5,h6{font-weight:bold;margin:3em 0 1em;position:relative}@media (min-width: 720px){header>h1{margin:6em 0 3em}}h1{font-size:1.5em;margin-top:5em}h2,h3{font-size:1.25em}h4,h5,h6{font-size:1em}section{padding-top:1rem;margin-top:-1rem}section.subsec>h6{margin-top:2em}section.subsec>h6>a{color:#333}section .spec-secid{margin-right:1ex}@media (min-width: 720px){section .spec-secid{position:absolute;right:100%;text-align:right;white-space:nowrap}}footer{font-size:75%;opacity:.5;text-align:center;margin-top:12rem}.spec-toc{margin:1rem 0 3rem}.spec-toc .title{content:"Contents";display:block;font-weight:bold;margin:5em 0 1em}.spec-toc .spec-secid{margin-right:1ex}.spec-toc ol{list-style:none;padding-left:0;margin-top:0;margin-bottom:0}.spec-toc ol ol{list-style:none;padding-left:2ex;margin-bottom:.25em}.spec-toc li{position:relative;padding:5px 0 0 30px;margin:-5px 0 0 -30px}.spec-toc a{color:#333}.spec-toc a:hover{text-decoration:none}.spec-toc a .spec-secid{color:#3b5998}.spec-toc a:hover .spec-secid{text-decoration:underline}.spec-toc .toggle{display:none}.spec-toc .toggle+label{cursor:pointer;left:6px;opacity:1;padding:5px 6px 5px 7px;position:absolute;top:6px;transform:rotate(0deg);transition:all .18s ease-in-out}.spec-toc .toggle+label:after{border-color:transparent transparent transparent #bbc;border-style:solid;border-width:6px 0 6px 7px;content:" ";display:block;height:0;width:0}@media (pointer: fine){.spec-toc .toggle+label{left:10px;padding:3px 5px 3px 6px;top:8px}}.spec-toc .toggle:checked+label{transform:rotate(90deg)}@media (hover: hover){.spec-toc li:not(:hover)>.toggle:checked+label{opacity:0}}.spec-toc .toggle:not(:checked)~ol{max-height:0;overflow:hidden;margin:0}.spec-sidebar-toggle{display:none}.spec-sidebar-toggle+label>.spec-sidebar-button{position:fixed;right:0;top:0;padding:10px 15px;font-size:30px;color:#000000b3;z-index:2;cursor:pointer;user-select:none;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none}.spec-sidebar-toggle:checked+label:after{content:"";position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0}.spec-sidebar{display:none;position:fixed;right:0;top:0;width:min(320px,calc(100vw - 48px));font-size:14px;line-height:1.75;overflow-y:scroll;height:100%;padding:0 0 5rem 30px;box-sizing:border-box;background:#f0f0f0;box-shadow:inset 1px 0 rgba(0,0,0,.05),-4px 0 8px -2px rgba(0,0,0,.04);overscroll-behavior:contain}.spec-sidebar{user-select:none;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none}.spec-sidebar-toggle:checked~.spec-sidebar{display:block}.spec-sidebar .viewing>a:after{color:#8b9;content:"\2022";margin-left:1ex}@media (min-width: 1220px){.spec-sidebar-toggle+label{display:none}.spec-sidebar{display:block;box-shadow:inset 1px 0 rgba(0,0,0,.05),inset 4px 0 8px -2px rgba(0,0,0,.08)!important}body{padding-right:345px}}.spec-note{background:#FEFEF3;border-left:solid 4px #F4E925;margin:1rem -1rem;min-width:70vw;padding:8px 1rem 12px calc(1rem - 4px);width:-moz-fit-content;width:-webkit-fit-content;width:fit-content}@media (min-width: 720px){.spec-note{min-width:416px}}.spec-note>a:first-child{color:#6c6613;display:block;font:italic 11pt/18pt Cambria,"Palatino Linotype",Palatino,"Liberation Serif",serif;opacity:.6;user-select:none}.spec-todo{color:#666;margin:1em 0 1em 5em;min-height:1em}.spec-todo::before{content:"todo";display:block;float:left;margin-left:-5em;text-transform:uppercase}.spec-index ol{list-style-type:none;margin:0 0 0 var(--indent);padding:0;column-width:210px;column-gap:var(--indent)}.spec-index ol li{width:min-content;white-space:nowrap}pre,code{font-family:Consolas,Monaco,"Andale Mono","Ubuntu Mono",monospace;font-size:var(--mono-font-size);font-weight:inherit}code{background:rgba(0,0,0,.03);margin:-2px -1px;padding:3px 3px;white-space:pre-wrap}pre>code{background:none;font-weight:inherit;margin:0;padding:0;white-space:pre}pre{background:#FAFAFA;border-left:solid 4px #E9E9E9;margin:1rem -1rem;min-width:70vw;padding:12px 1rem 12px calc(1rem - 4px);width:-moz-fit-content;width:-webkit-fit-content;width:fit-content;max-width:calc(100vw - 2rem);overflow-y:scroll}@media (min-width: 720px){pre{min-width:40ch}}.spec-example{background:#FAFAFF;border-left:solid 4px #BBBBFF;padding-top:8px}.spec-counter-example{background:#FFFAFA;border-left:solid 4px #FFBBBB;padding-top:8px}.spec-example>a,.spec-counter-example>a{display:block;font:italic 11pt/18pt Cambria,"Palatino Linotype",Palatino,"Liberation Serif",serif;opacity:.6;user-select:none}.spec-counter-example>a{color:#98593b}table{border-collapse:collapse}th{background-color:#f9f9f9}td,th{border:1px solid #D0D0D0;padding:.4em;vertical-align:baseline}ol,ul{padding-left:var(--list-indent)}li>ol,li>ul{margin-top:.25em;margin-bottom:.5em}li+li{margin-top:.25em}li.task{list-style-type:none;position:relative}li.task>input:first-child{margin-left:0;position:absolute;transform:translateX(calc(-100% - 1ch))}ins{background-color:#00c81e14;text-decoration:none}del{background-color:#c8000014}.spec-added,.spec-removed{border-left:4px solid;margin-left:-18px;padding-left:14px}.spec-added{border-color:#396}.spec-removed{border-color:#933;text-decoration:line-through}.spec-keyword{font-weight:bold}.spec-string{font-family:Consolas,Monaco,monospace;font-size:85%;white-space:pre}var{font-style:italic}*[data-name]{transition:.15s background ease-out;border-radius:2px;padding:0 3px;margin:0 -3px}.spec-semantic,.spec-algo{margin:1rem 0 1rem var(--dfn-indent)}.spec-semantic>.spec-nt::after,.spec-algo>.spec-call:first-child::after{content:":";font-style:normal;font-weight:bold;margin-left:1ex}.spec-semantic ol,.spec-semantic ol ol ol ol,.spec-algo ol,.spec-algo ol ol ol ol{list-style-type:decimal}.spec-semantic ol ol,.spec-semantic ol ol ol ol ol,.spec-algo ol ol,.spec-algo ol ol ol ol ol{list-style-type:lower-alpha}.spec-semantic ol ol ol,.spec-semantic ol ol ol ol ol ol,.spec-algo ol ol ol,.spec-algo ol ol ol ol ol ol{list-style-type:lower-roman}.spec-call>a{color:inherit}.spec-production{margin:1rem 0 1rem var(--dfn-indent)}.spec-production>.spec-nt::after{content:":";font-style:normal;font-weight:bold;margin:0 1ex}.spec-semantic.d2>.spec-nt::after,.spec-production.d2>.spec-nt::after{content:"::"}.spec-semantic.d3>.spec-nt::after,.spec-production.d3>.spec-nt::after{content:":::"}.spec-production>.spec-rhs{line-height:1.1;margin:.25em 0 .5em calc(2 * var(--indent));text-indent:calc(-1 * var(--indent))}.spec-semantic>.spec-rhs{display:inline-block;text-indent:calc(-1 * var(--indent));margin-left:calc(1ex + var(--indent))}.spec-rhs>*{text-indent:0}.spec-oneof{display:inline}.spec-oneof::before{content:"one of";font-style:normal;font-weight:bold}.spec-oneof-grid{max-width:calc(100vw - 2rem);overflow:scroll;margin:-1ex -1rem;padding:1ex 1rem}.spec-oneof-grid>table{margin-left:var(--indent)}.spec-oneof .spec-rhs{border:none;margin:0;padding:0 0 0 1rem;vertical-align:baseline;white-space:pre}.spec-oneof .spec-rhs:first-child{padding:0}.spec-rhs .spec-constrained:not(:first-child),.spec-rhs .spec-quantified:not(:first-child),.spec-rhs .spec-nt:not(:first-child),.spec-rhs .spec-t:not(:first-child),.spec-rhs .spec-rx:not(:first-child),.spec-rhs .spec-prose:not(:first-child),.spec-rhs .spec-empty:not(:first-child),.spec-rhs .spec-lookahead:not(:first-child){margin-left:1ex;display:inline-block}.spec-condition{font-size:85%}.spec-condition::before{content:"[if "}.spec-condition.not::before{content:"[if not "}.spec-condition::after{content:"]"}.spec-empty,.spec-prose{color:#666}.spec-nt{font-style:italic}.spec-nt>a{color:inherit}.spec-quantifiers,.spec-params{font-size:65%;font-style:normal;vertical-align:sub}.spec-quantifier.list{color:#3348d3}.spec-quantifier.optional{color:#83238e}.spec-params,.spec-condition{color:#1c7758}.spec-params::before{content:"["}.spec-params::after{content:"]"}.spec-quantifier:not(:last-child)::after,.spec-param:not(:last-child)::after{color:#666;content:", "}.spec-param.conditional::before{content:"?"}.spec-param.negated::before{content:"!"}.spec-t,.spec-rx{color:#333;font-family:monospace;font-weight:bold}.spec-butnot::before{color:#666;content:"but not";font-family:Cambria,"Palatino Linotype",Palatino,"Liberation Serif",serif;font-weight:normal;margin-right:1ex}.spec-butnot>*:not(:first-child)::before{color:#666;content:"or";font-family:Cambria,"Palatino Linotype",Palatino,"Liberation Serif",serif;font-weight:normal;margin-right:1ex}.spec-rhs .spec-oneof::before,.spec-rhs .spec-butnot::before{margin-left:1ex}.spec-lookahead>*{margin:0!important}.spec-lookahead>*:not(:first-child)::before{color:#666;content:", ";font-family:Cambria,"Palatino Linotype",Palatino,"Liberation Serif",serif;font-style:normal;font-weight:normal}.spec-lookahead::before{color:#666;content:"[lookahead = ";font-family:Cambria,"Palatino Linotype",Palatino,"Liberation Serif",serif;font-style:normal;font-weight:normal}.spec-lookahead.not::before{content:"[lookahead \2260  "}.spec-lookahead.set::before{content:"[lookahead \2208  {";margin-right:0}.spec-lookahead.set.not::before{content:"[lookahead \2209  {"}.spec-lookahead.ntset::before{content:"[lookahead \2208  ";margin-right:0}.spec-lookahead.ntset.not::before{content:"[lookahead \2209  "}.spec-lookahead::after{color:#666;content:"]"}.spec-lookahead.set::after{content:"}]"}.token.atrule,.token.attr-value,.token.keyword,.token.property,.token.selector,.token.attr-name,.token.builtin,.token.entity,.token.url,.token.inserted{color:#1b1994b0;background:none}.token.tag,.token.boolean,.token.number,.token.string,.token.char,.token.constant,.token.symbol,.token.regex,.token.important,.token.variable,.token.function,.token.class-name,.token.deleted{color:#a20764bd}.token.comment,.token.prolog,.token.doctype,.token.cdata,.token.description{color:inherit;opacity:.3}.token.punctuation{color:inherit;opacity:.5}.token.operator,.token.namespace{color:inherit;opacity:.7}</style>
+<script>(function(){var r,a=[];document.addEventListener("readystatechange",function(){document.readyState==="interactive"&&u()});function u(){var n=document.querySelector('label[for="spec-sidebar-toggle"]');n.addEventListener("scroll",o),n.addEventListener("touchmove",o);function o(d){d.preventDefault()}for(var t=document.getElementsByTagName("section"),e=0;e<t.length;e++)t[e].getAttribute("secid")&&a.push(t[e]);var i=window.scrollY,c=!1;window.addEventListener("scroll",function(d){i=window.scrollY,c||(c=!0,window.requestAnimationFrame(function(){s(i),c=!1}))})}function s(n){for(var o=n+document.documentElement.clientHeight/4,t,e=a.length-1;e>=0;e--)if(a[e].offsetTop<o){t=a[e];break}var i=t&&t.getAttribute("secid");i!==r&&(r&&l(r,!1),i&&l(i,!0),r=i)}function l(n,o){document.getElementById("_sidebar_"+n).className=o?"viewing":"";for(var t=n.split(".");t.length;){var e=document.getElementById("_toggle_"+t.join("."));e&&(e.checked=o),t.pop()}}s(window.scrollY);})();</script>
+<script>(function(){var n=document.getElementsByTagName("style")[0].sheet,e;function u(){e&&(n.deleteRule(e),e=void 0)}function d(t){u(),e=n.insertRule('*[data-name="'+t+'"] { background: rgba(230,215,0,0.12); }',n.cssRules.length)}document.documentElement.addEventListener("mouseover",function(t){var a=t.target.attributes["data-name"];a&&d(a.value)});document.documentElement.addEventListener("mouseout",u);})();</script>
+<script>(function(){var R="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_",o,p,r,g;document.addEventListener("selectionchange",E);window.addEventListener("resize",C);window.addEventListener("hashchange",x);window.addEventListener("load",x);function S(n){y(new URL(n.target.href))}function x(){y(window.location)}function y(n){var e=n.hash.match(/^#sel-([A-Za-z0-9-_]+)$/);if(!!e){g=e[1],r=k(g);var t=r.getBoundingClientRect(),d=Math.max(20,Math.floor((window.innerHeight-t.height)*.4));window.scrollTo(0,window.scrollY+t.y-d);var c=document.getSelection();c.empty(),c.addRange(r),C()}}function E(n){var e=document.getSelection();if(e.isCollapsed)o&&(o.parentNode.removeChild(o),o=null);else{var t=e.getRangeAt(0);(!r||t.compareBoundaryPoints(Range.START_TO_START,r)!==0||t.compareBoundaryPoints(Range.END_TO_END,r)!==0)&&(r=t,g=B(r),C())}}function C(){if(!!r){p||(p=document.getElementsByTagName("article")[0]),o||(o=document.createElement("a"),document.body.appendChild(o)),o.href="#sel-"+g,o.onclick=S,o.className=r.isOutdated?"outdated-selection-link":"selection-link",o.innerText=r.isOutdated?"!":"\u201F";var n=window.innerWidth<720,e=r.getBoundingClientRect();if(n)o.style.left=Math.floor(e.x+e.width/2+window.scrollX-13)+"px",o.style.top=Math.floor(e.bottom+window.scrollY+10)+"px";else{var t=p.getBoundingClientRect().x;o.style.left=Math.floor(t+window.scrollX-37)+"px",o.style.top=Math.floor(e.y+window.scrollY-3)+"px"}}}function B(n){var e="",t=N(n.startContainer),d=N(n.endContainer),c=M(t,d);return l(c),l(t.slice(c.length).concat(n.startOffset)),l(d.slice(c.length).concat(n.endOffset)),i(L(n.toString())),e;function i(a){do e+=R[a&31|(a>31?32:0)],a>>=5;while(a>0)}function l(a){i(a.length);for(var h=0;h<a.length;h++)i(a[h])}}function k(n){for(var e=new Array(64),t=0;t<64;t++)e[R.charCodeAt(t)]=t;var d=0,c=m(),i=m(),l=m(),a=w(),h=i.pop(),P=O(c.concat(i)),T=l.pop(),A=O(c.concat(l)),u=document.createRange();return u.setStart(P,h),u.setEnd(A,T),u.isOutdated=a!==void 0&&a!==L(u.toString()),u;function w(){for(var s=0,v=0;d<n.length;){var f=e[n.charCodeAt(d++)];if(s|=(f&31)<<v,v+=5,f<32)return s}}function m(){var s=w();if(s!=null){for(var v=new Array(s),f=0;f<s;f++)v[f]=w();return v}}}function N(n){for(var e=[];n!=document.body;){var t=n.parentNode;e.push(Array.prototype.indexOf.call(t.childNodes,n)),n=t}return e.reverse()}function O(n){for(var e=document.body,t=0;t<n.length&&e;t++)e=e.childNodes[n[t]];return e}function M(n,e){for(var t=0;t<n.length&&t<e.length&&n[t]===e[t];)t++;return n.slice(0,t)}function L(n){for(var e=2166136261,t=0;t<n.length;++t)e^=n.charCodeAt(t),e+=(e<<1)+(e<<4)+(e<<7)+(e<<8)+(e<<24);return(e>>15^e)&32767}})();</script>
+</head>
+<body><article>
+<header>
+<h1>GraphQL in Shopline Spec</h1>
+<nav class="spec-toc">
+<div class="title">Contents</div>
+<ol>
+<li><a href="#sec--Type"><span class="spec-secid">1</span>类型&rarr;Type</a><ol>
+<li><a href="#sec--Type-Definition"><span class="spec-secid">1.1</span>类型定义&rarr;Type Definition</a><ol>
+<li><a href="#sec-Scalar"><span class="spec-secid">1.1.1</span>Scalar</a><ol>
+<li><a href="#sec--Statute"><span class="spec-secid">1.1.1.1</span>约束&rarr;Statute</a></li>
+</ol>
+</li>
+<li><a href="#sec-Object"><span class="spec-secid">1.1.2</span>Object</a></li>
+<li><a href="#sec-Union-Interface"><span class="spec-secid">1.1.3</span>Union &amp; Interface</a><ol>
+<li><a href="#sec-Union"><span class="spec-secid">1.1.3.1</span>Union</a><ol>
+<li><a href="#sec-Union.-"><span class="spec-secid">1.1.3.1.1</span>定义</a></li>
+</ol>
+</li>
+<li><a href="#sec-Interface"><span class="spec-secid">1.1.3.2</span>Interface</a></li>
+</ol>
+</li>
+<li><a href="#sec-Enum"><span class="spec-secid">1.1.4</span>Enum</a></li>
+<li><a href="#sec-Input-Object"><span class="spec-secid">1.1.5</span>Input Object</a><ol>
+<li><a href="#sec-Input-Object.-"><span class="spec-secid">1.1.5.1</span>约束</a></li>
+</ol>
+</li>
+<li><a href="#sec-Payload"><span class="spec-secid">1.1.6</span>Payload</a></li>
+<li><a href="#sec--Type-Definition.Connection"><span class="spec-secid">1.1.7</span>Connection</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><a href="#sec--Graph"><span class="spec-secid">2</span>图&rarr;Graph</a><ol>
+<li><a href="#sec--Graph.-"><span class="spec-secid">2.1</span>图的上下文</a></li>
+<li><a href="#sec--Graph.-"><span class="spec-secid">2.2</span>场景</a></li>
+</ol>
+</li>
+<li><a href="#sec--Domain"><span class="spec-secid">3</span>领域&rarr;Domain</a><ol>
+<li><a href="#sec--Domain.-"><span class="spec-secid">3.1</span>聚合根</a></li>
+<li><a href="#sec--Domain.-"><span class="spec-secid">3.2</span>领域实体</a></li>
+<li><a href="#sec--Domain.-"><span class="spec-secid">3.3</span>值对象</a></li>
+</ol>
+</li>
+<li><a href="#sec--Connections"><span class="spec-secid">4</span>分页&rarr;Connections</a><ol>
+<li><a href="#sec--Connections.Connection"><span class="spec-secid">4.1</span>Connection</a><ol>
+<li><a href="#sec--Connections.Connection.-"><span class="spec-secid">4.1.1</span>类型结构</a></li>
+</ol>
+</li>
+<li><a href="#sec--Connections.-"><span class="spec-secid">4.2</span>分页增强</a><ol>
+<li><a href="#sec-query"><span class="spec-secid">4.2.1</span>query</a><ol>
+<li><a href="#sec-query.-"><span class="spec-secid">4.2.1.1</span>语法分析</a><ol>
+<li><a href="#sec-query.-.-"><span class="spec-secid">4.2.1.1.1</span>实践</a></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><a href="#sec--Permission"><span class="spec-secid">5</span>权限&rarr;Permission</a><ol>
+<li><a href="#sec--Permission.-"><span class="spec-secid">5.1</span>权限的校验</a></li>
+</ol>
+</li>
+<li><a href="#sec--Version"><span class="spec-secid">6</span>版本&rarr;Version</a><ol>
+<li><a href="#sec--Version.-"><span class="spec-secid">6.1</span>版本的名称</a></li>
+<li><a href="#sec--Version.-"><span class="spec-secid">6.2</span>版本递增约束</a></li>
+<li><a href="#sec--Version.-"><span class="spec-secid">6.3</span>兼容性</a></li>
+</ol>
+</li>
+<li><a href="#sec--Error"><span class="spec-secid">7</span>错误&rarr;Error</a><ol>
+<li><a href="#sec-Http"><span class="spec-secid">7.1</span>Http</a></li>
+<li><a href="#sec--Error.-"><span class="spec-secid">7.2</span>业务错误</a><ol>
+<li><a href="#sec-Query-"><span class="spec-secid">7.2.1</span>Query错误</a></li>
+<li><a href="#sec-Mutation-"><span class="spec-secid">7.2.2</span>Mutation错误</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><a href="#sec--RateLimiter"><span class="spec-secid">8</span>限速&rarr;RateLimiter</a><ol>
+<li><a href="#sec-Time-based-"><span class="spec-secid">8.1</span>Time-based 算法</a></li>
+<li><a href="#sec-Scope-"><span class="spec-secid">8.2</span>Scope 算法</a></li>
+</ol>
+</li>
+<li><a href="#sec--Document"><span class="spec-secid">9</span>文档&rarr;Document</a><ol>
+<li><a href="#sec--Document.-"><span class="spec-secid">9.1</span>自省</a></li>
+<li><a href="#sec-graphiQL"><span class="spec-secid">9.2</span>graphiQL</a></li>
+<li><a href="#sec--Document.-"><span class="spec-secid">9.3</span>文档多语言</a></li>
+</ol>
+</li>
+<li><a href="#sec--Do"><span class="spec-secid">10</span>实践&rarr;Do</a><ol>
+<li><a href="#sec-ID"><span class="spec-secid">10.1</span>ID</a><ol>
+<li><a href="#sec-encodeString"><span class="spec-secid">10.1.1</span>encodeString</a></li>
+<li><a href="#sec-gid"><span class="spec-secid">10.1.2</span>gid</a><ol>
+<li><a href="#sec-gid.-"><span class="spec-secid">10.1.2.1</span>协议</a><ol>
+<li><a href="#sec-gid.-.-"><span class="spec-secid">10.1.2.1.1</span>子域</a></li>
+<li><a href="#sec-gid.-.-"><span class="spec-secid">10.1.2.1.2</span>场景</a></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><a href="#sec-node-nodes"><span class="spec-secid">10.2</span>node &amp; nodes</a><ol>
+<li><a href="#sec-Node"><span class="spec-secid">10.2.1</span>Node</a><ol>
+<li><a href="#sec-Node-"><span class="spec-secid">10.2.1.1</span>Node支撑域</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><a href="#sec--Scalar"><span class="spec-secid">10.3</span>自定义Scalar</a></li>
+</ol>
+</li>
+<li><a href="#index"><span class="spec-secid">§</span>Index</a></li>
+</ol>
+</nav>
+</header>
+<section id="sec--Type" secid="1">
+<h1><span class="spec-secid" title="link to this section"><a href="#sec--Type">1</a></span>类型&rarr;Type</h1>
+<section id="sec--Type-Definition" secid="1.1">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec--Type-Definition">1.1</a></span>类型定义&rarr;Type Definition</h2>
+<p>创建类型是一切的起点，GraphQL 支持如下的类型</p>
+<ul>
+<li>Scalar<ul>
+<li>ID </li>
+<li>String</li>
+<li>Float</li>
+<li>Int</li>
+<li>Boolean</li>
+</ul>
+</li>
+<li>Object</li>
+<li>InputObject</li>
+<li>Enum</li>
+<li>Union</li>
+</ul>
+<section id="sec-Scalar" secid="1.1.1">
+<h3><span class="spec-secid" title="link to this section"><a href="#sec-Scalar">1.1.1</a></span>Scalar</h3>
+<p>Scalar 是基本类型。 因此可以用作<code>输入</code>或者 <code>输出</code></p>
+<div class="spec-production" id="Example">
+<span class="spec-nt"><a href="#Example" data-name="Example">Example</a></span><div class="spec-rhs"><span class="spec-t">比如</span><span class="spec-t">user(id:ID):User</span></div>
+</div>
+<div id="note-f005f" class="spec-note">
+<a href="#note-f005f">Note</a>
+ id 为参数(argument),输出为<code>User</code></div>
+<section id="sec--Statute" secid="1.1.1.1">
+<h4><span class="spec-secid" title="link to this section"><a href="#sec--Statute">1.1.1.1</a></span>约束&rarr;Statute</h4>
+<ol>
+<li>ID必须 是有 唯一 业务含义</li>
+<li>ID必须 属于一个 <code>Object</code> 的 字段</li>
+<li>ID 必须属于某个<code>领域实体</code>，而不是<code>值对象</code> </li>
+<li>Scalar 的类型必须要保证 实现 <code>valueToLiteral</code> </li>
+</ol>
+<div id="note-bcc81" class="spec-note">
+<a href="#note-bcc81">Note</a>
+比如<code>CustomerUser</code> 拥有ID,但是 <code>Money</code>不能拥有<code>ID</code> </div>
+<div id="note-1a7b2" class="spec-note">
+<a href="#note-1a7b2">Note</a>
+当Scalar 没有实现<code>valueToLiteral</code>， 作为输入参数，在Schema自省获取文档的时候，会出现异常。</div>
+</section>
+</section>
+<section id="sec-Object" secid="1.1.2">
+<h3><span class="spec-secid" title="link to this section"><a href="#sec-Object">1.1.2</a></span>Object</h3>
+<p>Object 是<code>GraphQL</code> 最重要的Type. <code>Object</code> 代表了领域对象。</p>
+<div id="note-c5dde" class="spec-note">
+<a href="#note-c5dde">Note</a>
+ 关于领域对象，参见<a href="#%E9%A2%86%E5%9F%9F">领域对象</a></div>
+</section>
+<section id="sec-Union-Interface" secid="1.1.3">
+<h3><span class="spec-secid" title="link to this section"><a href="#sec-Union-Interface">1.1.3</a></span>Union &amp; Interface</h3>
+<p><code>Union</code> 与 <code>Interface</code> ，两者都是抽象的。</p>
+<section id="sec-Union" secid="1.1.3.1">
+<h4><span class="spec-secid" title="link to this section"><a href="#sec-Union">1.1.3.1</a></span>Union</h4>
+<p><code>Union</code> 拥有一个可能的对象列表。</p>
+<section id="sec-Union.-" secid="1.1.3.1.1">
+<h5><span class="spec-secid" title="link to this section"><a href="#sec-Union.-">1.1.3.1.1</a></span>定义</h5>
+<div class="spec-production" id="Example">
+<span class="spec-nt"><a href="#Example" data-name="Example">Example</a></span><div class="spec-rhs"><span class="spec-t">type MyUnion{ A | B | C }</span></div>
+</div>
+<p><code>Union</code> 的命名规则应该于对象保持一致，代表某种特殊的<code>领域</code>。 比如一个 <code>多媒体</code>, 它可能是</p>
+<ol>
+<li>普通的文本</li>
+<li>图片</li>
+<li>视频流</li>
+<li>其他文件 因此 <code>union</code> 可以用做表达一些不可共存的资源的共同抽象。 它可能是枚举对象的任何一个。</li>
+</ol>
+</section>
+</section>
+<section id="sec-Interface" secid="1.1.3.2">
+<h4><span class="spec-secid" title="link to this section"><a href="#sec-Interface">1.1.3.2</a></span>Interface</h4>
+<p>跟 <span class="spec-nt"><span data-name="Union">Union</span></span> 一样， <span class="spec-nt"><span data-name="Interface">Interface</span></span> 本身也是一种抽象类型。 Interface 拥有两种能力</p>
+<ol>
+<li>更好的组织对象</li>
+<li>保持接口的统一</li>
+</ol>
+<div id="note-a0f9d" class="spec-note">
+<a href="#note-a0f9d">Note</a>
+ 面向对象设计，更好的组织对象，比如 <code>Product</code> 实现了 <code>Node</code> 接口。就具有 <code>id</code> 字段。</div>
+</section>
+</section>
+<section id="sec-Enum" secid="1.1.4">
+<h3><span class="spec-secid" title="link to this section"><a href="#sec-Enum">1.1.4</a></span>Enum</h3>
+<p><code>Enum</code> 是一些字面量的枚举。 当对有效资源状态进行跟踪的时候，记住使用<code>Enum</code></p>
+<div class="spec-production" id="Example">
+<span class="spec-nt"><a href="#Example" data-name="Example">Example</a></span><div class="spec-rhs"><span class="spec-t">enum SEX{M,F}</span></div>
+</div>
+<div id="note-ec205" class="spec-note">
+<a href="#note-ec205">Note</a>
+ 如果不使用枚举，graph的接口将越来越难懂。因此，所有的状态都 <span class="spec-t">强制</span> 要定义枚举。</div>
+</section>
+<section id="sec-Input-Object" secid="1.1.5">
+<h3><span class="spec-secid" title="link to this section"><a href="#sec-Input-Object">1.1.5</a></span>Input Object</h3>
+<p>Input Object 仅仅用来作为输入的参数，代表一组数据的聚合。它可以使用用任何<code>Scalar</code>和<code>InputObject</code>。但并不能用作<code>output</code>。这是它跟对象的最大区别。</p>
+<section id="sec-Input-Object.-" secid="1.1.5.1">
+<h4><span class="spec-secid" title="link to this section"><a href="#sec-Input-Object.-">1.1.5.1</a></span>约束</h4>
+<p>以下约束建议<code>强制</code>遵守</p>
+<ol>
+<li>input的命名必须是 <span class="spec-t">$func</span><span class="spec-nt"><span data-name="Input">Input</span></span></li>
+<li>input用作<code>Mutation</code> 的时候，必须包含动词 如<span class="spec-t">$Resource</span><span class="spec-t">$Method</span><span class="spec-nt"><span data-name="Input">Input</span></span></li>
+<li>input一般用在<code>Mutation</code>,减少在query使用,保证<code>query</code>接口的干净 Note: 比如 <code>UserCreateInput</code></li>
+</ol>
+</section>
+</section>
+<section id="sec-Payload" secid="1.1.6">
+<h3><span class="spec-secid" title="link to this section"><a href="#sec-Payload">1.1.6</a></span>Payload</h3>
+<p>Payload 代表 <code>Mutation</code> 的返回</p>
+<ul>
+<li>Payload 所有的变更，都需要一个 <code>Payload</code>对象作为输出。 <code>Payload</code> 对象命名必须是 <span class="spec-t">$Domain</span><span class="spec-t">$operate</span>Payload 对象, 如 <code>UserCreatePayload</code>。 其中 <ol>
+<li>Domain 代表名词 如 <code>User</code></li>
+<li>operate 代表动词 如 <code>Create</code></li>
+<li><code>Payload</code> 同时也根据 <code>mutation</code>的 <code>field name</code> 来决定，在本例中，我们可以知道，<code>mutation</code> 是名字 <code>userCreate</code></li>
+</ol>
+</li>
+</ul>
+<div id="note-41fff" class="spec-note">
+<a href="#note-41fff">Note</a>
+ <code>Payload</code> <strong>禁止</strong> 共享</div>
+</section>
+<section id="sec--Type-Definition.Connection" secid="1.1.7">
+<h3><span class="spec-secid" title="link to this section"><a href="#sec--Type-Definition.Connection">1.1.7</a></span>Connection</h3>
+<p>参见下文 <a href="#sec--Connections">分页</a></p>
+<div id="note-58165" class="spec-note">
+<a href="#note-58165">Note</a>
+ <code>Connection</code> <strong>禁止</strong> 共享</div>
+</section>
+</section>
+</section>
+<section id="sec--Graph" secid="2">
+<h1><span class="spec-secid" title="link to this section"><a href="#sec--Graph">2</a></span>图&rarr;Graph</h1>
+<section id="sec--Graph.-" secid="2.1">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec--Graph.-">2.1</a></span>图的上下文</h2>
+<p>在GraphQL 中，一切都是 Graph。 许多领域都会有关联，比如一个 <code>Customer</code>领域 拥有 <code>Metafield</code> 的知识，尽管他们之前的关联非常弱。 现在在同一个<code>graph</code>中，他们可以互相传递自己的知识。</p>
+<p>这意味着，我们在设计 GraphQL 的时候，考虑的 每一个领域都不再是一个单独的 <em>领域实体</em> ，应当将领域 理解成为 <em>聚合根</em>。每一个聚合根都可能关联其他聚合根。 聚合根的边界 用来划分不同的团队。每个域的团队都应该慎重的考虑业务模型，基于聚合根的边界来决定对于其他领域的依赖。 比如 <code>Customer</code> 不会依赖 <code>Online Store</code> 的对象。 因为，<code>Customer</code> 的聚合根应当聚合 从<code>customer</code>视角出发观察到的边。 相反的，<code>Online Store</code> 却可以包含 <code>Customer</code>。</p>
+<p>在构建图的时候，需要团队协作。</p>
+<div id="note-45ebd" class="spec-note">
+<a href="#note-45ebd">Note</a>
+ 团队必须短暂的忘记现有的领域模型，从顶层重新设计基于图的领域模型。这也就是基于GraphQL 实例本身的。</div>
+<p>举个例子，比如 <code>User</code> 和 <code>Order</code>往往是两个团队，他们处于两个不同的 领域聚合根下，但是，在一个 <code>用户订单图</code>中，他们是需要合作的，因此顶层设计者需要先设计出 基于当前图的新的领域对象， 如 <code>UserOrderGraph</code>, 在当前图下，会产生新的领域聚合根，如 <code>UserOrderObject</code>, <code>User</code> 团队 和 <code>Order</code> 团队共享 <code>UserOrderObject</code>。 他们各自提供一部分能力，但是在设计上不能表达出这种差异。 使用者感知到的是 <code>UserOrderObject</code> 对象，他们在开发的时候思维会自动进入到 <code>UserOrderObject</code>上下文。 在这个上下文中 <code>UserOrder</code>的每个字段都是平等的，就像是一个领域对象一样。</p>
+<p>因此，如果以现有的 领域模型来构建图 是不合理的。 应当自上而下的重新设计。 任何两个领域的对象都可能会融合在一起，只要给定一个合理的上下文。也就是GraphQL 上下文。</p>
+</section>
+<section id="sec--Graph.-" secid="2.2">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec--Graph.-">2.2</a></span>场景</h2>
+<p>为了确定图的上下文，需要引入一个管理员角色，叫<code>图之管理员</code>, 这个角色用来确保 一张图里面要包含 什么。</p>
+<p>一张图里包含了该图的 <code>领域知识</code>,这些领域知识 并非由于 图的数据支撑者来决定的。而是基于 图本身来确定的。</p>
+<p>因此，可以借<span class="spec-nt"><span data-name="DDD">DDD</span></span>来思考，在图的上下文里，领域又是什么？</p>
+<p>思考这个问题不仅仅需要 图之管理者，还需要 <code>场景支撑者</code>，场景支撑者 是 领域 的子集。 比如 有10 领域团队， 场景支撑着可能是其中的7个。</p>
+<div id="note-089f8" class="spec-note">
+<a href="#note-089f8">Note</a>
+领域团队，一般就是 负责某个领域的实体或个人。</div>
+<p>可以按照如下的步骤进行筛选：</p>
+<ol>
+<li>头脑风暴，沿着场景，模拟行为</li>
+<li>行为产生事件，将事件汇总成表</li>
+<li>筛选领域团队 明确事件表，进行场景补充</li>
+</ol>
+<div id="note-0a3d3" class="spec-note">
+<a href="#note-0a3d3">Note</a>
+可以选择一个角色来担任<code>图之管理员</code>.</div>
+</section>
+</section>
+<section id="sec--Domain" secid="3">
+<h1><span class="spec-secid" title="link to this section"><a href="#sec--Domain">3</a></span>领域&rarr;Domain</h1>
+<p>GraphQL需要将领域对象转化成 图的领域对象。 一般情况下，图的领域对象是需要重建的。比如 <code>User</code>对象，可以是 <code>普通用户</code>,也可以是一个 <code>VIP会员</code>。</p>
+<p>当需要构建一张所有会员在的关系图来获取每个会员在其他平台的用户身份时候，就不能直接引入平台A的 <code>VIP</code> 领域 或者 平台B的 <code>User</code>领域。</p>
+<p>因为这两个领域知识是完全隔离的。因此，就需要重建领域，重新构建当前图的 <code>VIP</code> 领域和 <code>User</code>领域。</p>
+<p>比如 平台A的 <code>VIP</code> 领域，拥有 <code>VIP</code>:<code>好感值</code> 这一属性，那么当<code>VIP</code> 领域被转移到当前图的时候，则可以安全移除这一属性。我们可以给当前图的<code>VIP</code>增加额外的属性， <code>from</code>来表明当前VIP来源于哪一个平台。这样外部的领域知识如何变化，影响不到我们图输出的领域知识。因为我们的领域知识是基于当前图的上下文。</p>
+<section id="sec--Domain.-" secid="3.1">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec--Domain.-">3.1</a></span>聚合根</h2>
+<p>GraphQL 仍旧可以按照 <span class="spec-nt"><span data-name="DDD">DDD</span></span> 来设计，一个聚合根可以是一个 <code>Query</code>对象，也可以是任何 <code>Type</code>。</p>
+<p>聚合根是数据的提供者，即任何的领域实体/值对象 都不能绑定字段解析函数。所有的函数必须收敛到聚合根里。</p>
+<p>在GraphQL中，所有<code>Query</code>/<code>Mutation</code>/<code>Subscription</code> 都是根， 他代表的用户的访问入口。</p>
+<p>他们的字段（Field) 每一个字段的类型代表了一个聚合根。</p>
+<p>比如定义</p>
+<pre><code>type Query{
+  card(id:String!):Card!
+
+}
+</code></pre>
+<p>任何一个<code>Type</code> 都可以是一个聚合根。聚合根的每一个字段都可以设置一个字段Resolver。</p>
+<p>当一个 <code>Type</code> 是聚合根的时候，它可以extend 任意领域的能力。 比如 <code>User</code> 是一个聚合根，则可以扩展 <code>BTC</code>领域的 <code>userBtcAddress</code>.</p>
+<pre><code>extend User{
+  userBtcAddress:BTCAddressCtxAddress!
+}
+
+</code></pre>
+</section>
+<section id="sec--Domain.-" secid="3.2">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec--Domain.-">3.2</a></span>领域实体</h2>
+<p>领域实体 代表一种 <code>Pure Busioness Model</code>(纯业务模型)，领域实体本身不包含图的行为(不绑定函数)，除此之外，跟<span class="spec-nt"><span data-name="DDD">DDD</span></span>中的领域实体一样。 领域实体明确了当前需要返回的领域模型， 它的领域聚合根负责通过 Resolver函数将数据映射到 模型之上。</p>
+<p>领域实体是基于图的，在很多时候，图的场景的支撑域的领域知识可以迁移到图的上下文。但是并不是完全一致，可以是一个子集。</p>
+<p>任何领域实体都应该可以被安全的被其他聚合跟依赖。</p>
+</section>
+<section id="sec--Domain.-" secid="3.3">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec--Domain.-">3.3</a></span>值对象</h2>
+<p>值对象 是一些公共的对象和枚举。 如 <code>PageInfo</code>和 <code>Money</code>对象，值对象本身绝对不能绑定Resolver. 值对象必须是无状态的。</p>
+<div id="note-5b6c3" class="spec-note">
+<a href="#note-5b6c3">Note</a>
+值对象绑定 Resolver将导致无法被安全的依赖。比如<code>PageInfo</code>绑定了解析函数，将导致任何依赖分页的返回错误。</div>
+</section>
+</section>
+<section id="sec--Connections" secid="4">
+<h1><span class="spec-secid" title="link to this section"><a href="#sec--Connections">4</a></span>分页&rarr;Connections</h1>
+<p>分页采用基于<code>cursor</code>的分页规则，每一个分页的对象都必须是一个<code>Connection</code>。包含 <code>pageInfo</code>,<code>edges</code></p>
+<section id="sec--Connections.Connection" secid="4.1">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec--Connections.Connection">4.1</a></span>Connection</h2>
+<p>Connection用作分页类型，当一个<code>query</code> 需要分页的时候，必须返回一个Connection。 Connection有如下规约:</p>
+<ol>
+<li>Connection 必须是一个 <code>Object</code></li>
+<li>Connection 命名必须是 <code>{$Domain}Connection</code> 如 <code>UserConnection</code></li>
+<li>Connection 对象必须包含 两个字段 <code>edges</code>,<code>pageInfo</code></li>
+<li>Node Node 仅仅包含一个字段 <code>id:ID!</code></li>
+<li>Edge 所有的Edge 都需要实现Node</li>
+</ol>
+<section id="sec--Connections.Connection.-" secid="4.1.1">
+<h3><span class="spec-secid" title="link to this section"><a href="#sec--Connections.Connection.-">4.1.1</a></span>类型结构</h3>
+<pre><code>{
+  "data": {
+    "__type": {
+      "fields": [
+        // May contain other items
+        {
+          "name": "pageInfo",
+          "type": {
+            "name": null,
+            "kind": "NON_NULL",
+            "ofType": {
+              "name": "PageInfo",
+              "kind": "OBJECT"
+            }
+          }
+        },
+        {
+          "name": "edges",
+          "type": {
+            "name": null,
+            "kind": "LIST",
+            "ofType": {
+              "name": "ExampleEdge",
+              "kind": "OBJECT"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+</code></pre>
+<p>分页 必须接受如下的参数. <code>first</code>,<code>after</code>,<code>last</code>,<code>before</code>.</p>
+<div id="note-077c4" class="spec-note">
+<a href="#note-077c4">Note</a>
+具体参见 <a href="https://relay.dev/graphql/connections.htm">Relay</a></div>
+</section>
+</section>
+<section id="sec--Connections.-" secid="4.2">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec--Connections.-">4.2</a></span>分页增强</h2>
+<section id="sec-query" secid="4.2.1">
+<h3><span class="spec-secid" title="link to this section"><a href="#sec-query">4.2.1</a></span>query</h3>
+<p>真实的场景中，往往需要对分页按照某个条件进行过滤。我们可以将想要的查询条件都追加在分页的定义上</p>
+<div class="spec-production" id="Example">
+<span class="spec-nt"><a href="#Example" data-name="Example">Example</a></span><div class="spec-rhs"><span class="spec-t">page(first</span><span class="spec-t">,last</span><span class="spec-t">,before</span><span class="spec-t">,after</span><span class="spec-t">,byName</span><span class="spec-t">,byType</span><span class="spec-t">,byTag...):PageConnection</span></div>
+</div>
+<p>这样做的一个点在于分页的参数将越来越多，后面难以维护。因此，我们需要提供一个<span class="spec-t">字符串</span> 语法来代表搜索分页的过滤条件: <var data-name="query">query</var></p>
+<section id="sec-query.-" secid="4.2.1.1">
+<h4><span class="spec-secid" title="link to this section"><a href="#sec-query.-">4.2.1.1</a></span>语法分析</h4>
+<p>采用 <a href="https://zh.m.wikipedia.org/zh/%E6%89%A9%E5%B1%95%E5%B7%B4%E7%A7%91%E6%96%AF%E8%8C%83%E5%BC%8F">EBNF</a>来描述语法</p>
+<p>如可以生成如下的语法</p>
+<div class="spec-production" id="Example">
+<span class="spec-nt"><a href="#Example" data-name="Example">Example</a></span><div class="spec-rhs"><span class="spec-t">fieldA=1</span><span class="spec-t">and</span><span class="spec-t">fieldB=2</span></div>
+</div>
+<section id="sec-query.-.-" secid="4.2.1.1.1">
+<h5><span class="spec-secid" title="link to this section"><a href="#sec-query.-.-">4.2.1.1.1</a></span>实践</h5>
+<p>通过 <a href="https://www.antlr.org/">ANTLT4</a> 可以快速的构建你的词法/语法解析器。 </p>
+<p><code>query</code>语法必须是简单的，非图灵完备的。因此，在设计语法的时候，不要定义产生循环的语法。 保持简单，仅仅作为一个过滤器。</p>
+<div class="spec-production" id="Example">
+<span class="spec-nt"><a href="#Example" data-name="Example">Example</a></span><div class="spec-rhs"><span class="spec-t">a:1</span><span class="spec-t">and</span><span class="spec-t">b:2</span><span class="spec-t">or</span><span class="spec-t">c:1</span></div>
+</div>
+</section>
+</section>
+</section>
+</section>
+</section>
+<section id="sec--Permission" secid="5">
+<h1><span class="spec-secid" title="link to this section"><a href="#sec--Permission">5</a></span>权限&rarr;Permission</h1>
+<p>开放给外部的字段有可能需要权限控制。设计的权限点应当能清晰的描述权限的能力。 因此，这里推荐一种基于字段的权限编码约束</p>
+<ol>
+<li>所有的读权限都必须包含 <code>read_$field</code></li>
+<li>所有的写权限都必须包含 <code>write_$field</code></li>
+</ol>
+<p><span class="spec-t">读</span>和<span class="spec-t">写</span>可以覆盖到几乎全部的场景，$field 应当是名词，代表操作的资源。</p>
+<section id="sec--Permission.-" secid="5.1">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec--Permission.-">5.1</a></span>权限的校验</h2>
+<p>权限的检验应当发生在验证阶段,在执行字段解析函数之前，就应当检查字段的权限。</p>
+<div id="note-785a7" class="spec-note">
+<a href="#note-785a7">Note</a>
+ 在Java的 graphql 版本中,可以通过 <code>FieldValidation</code> 拦截器进行处理</div>
+</section>
+</section>
+<section id="sec--Version" secid="6">
+<h1><span class="spec-secid" title="link to this section"><a href="#sec--Version">6</a></span>版本&rarr;Version</h1>
+<p>每一个GraphQL 都是一个运行的实例，也代表一个确定的版本，因此，当graphQL 作为一张图来提供服务的时候，就自然要引入版本的概念。</p>
+<p>对外的服务需要包含:</p>
+<ul>
+<li>不稳定版本</li>
+<li>候选版本</li>
+<li>稳定版本</li>
+<li>历史版本（可选）</li>
+</ul>
+<p>不稳定版本可以提供一些实现性的能力，这些能力可能会被删除或者移动到稳定版本。 稳定版本必须保持完整向下的兼容逻辑。 比如一张图 <code>v20220101</code> 版本必须包含 <code>v20210728</code>版本的数据。但高版本新增的服务，则一定不能被低版本感知到。</p>
+<p>Example:</p>
+<p>在版本 <code>v20210728</code> 中存在 <code>Query</code> <code>findByName</code>，则在版本<code>v20220101</code> 中必须要包含findByName，即便是已经被废弃。 在版本 <code>v20220101</code> 中新增的 <code>Query</code> <code>findByNameV2</code>，则在版本 <code>v20210728</code> 中一定不能存在。 因为低版本无法感知到高版本。</p>
+<section id="sec--Version.-" secid="6.1">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec--Version.-">6.1</a></span>版本的名称</h2>
+<p>版本的命名 可以按照时间 的递增序列，如 <code>20220101</code> ,<code>20220501</code>.递增的版本序列传递了当前版本的迭代周期。有利于开发者在引入版本的时候做决策。</p>
+<p>版本的命名 还可以增加自定义的一些属性，用来标识当前版本的某个状态，比如 <code>2022-01-01-BETA</code>。这些描述是可选的。但是，在一个产品里面的版本序列的命名规范是统一的。</p>
+<div id="note-587f8" class="spec-note">
+<a href="#note-587f8">Note</a>
+ graphQL中的版本应该始终有一个单调递增的时间序列来表达，因为graphQL的接口代表图的知识，是随着时间进行迭代的。</div>
+</section>
+<section id="sec--Version.-" secid="6.2">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec--Version.-">6.2</a></span>版本递增约束</h2>
+<p>不稳定版本 随着时间的推移和沉淀，会变得稳定，因为他首选成为一个<span class="spec-t">候选版本</span>。 候选版本会变成稳定版本。 稳定版本应该维护一个时间序列的链。 当一个版本变成稳定版本的时候，就要考虑移除掉稳定版本链末端的版本。 控制稳定版本的数量，否则它会越来越庞大。</p>
+<div id="note-fcf90" class="spec-note">
+<a href="#note-fcf90">Note</a>
+ 如果是对外部用户的graph，推荐用 <code>3-4</code> 个稳定版本序列。 如果是对内，推荐 <code>1</code> 个稳定版本。</div>
+</section>
+<section id="sec--Version.-" secid="6.3">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec--Version.-">6.3</a></span>兼容性</h2>
+<p>在graphql中，任何一个字段都可以被很轻易的添加在 <code>graph</code>中，当非常难以移除。当一个字段开放出去，要移除这个字段就需要漫长的等待。</p>
+<div class="spec-todo">
+</div>
+</section>
+</section>
+<section id="sec--Error" secid="7">
+<h1><span class="spec-secid" title="link to this section"><a href="#sec--Error">7</a></span>错误&rarr;Error</h1>
+<section id="sec-Http" secid="7.1">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Http">7.1</a></span>Http</h2>
+<div id="note-edcf5" class="spec-note">
+<a href="#note-edcf5">Note</a>
+ 下面是常见的Http错误枚举，应当在非业务异常是暴露给开发者</div>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UNKNOWN</td>
+<td>520</td>
+<td>Unknown Error</td>
+</tr>
+<tr>
+<td>INTERNAL</td>
+<td>500</td>
+<td>Internal Server Error</td>
+</tr>
+<tr>
+<td>NOT_FOUND</td>
+<td>404</td>
+<td>Not Found</td>
+</tr>
+<tr>
+<td>UNAUTHENTICATED</td>
+<td>401</td>
+<td>Unauthorized</td>
+</tr>
+<tr>
+<td>PERMISSION_DENIED</td>
+<td>403</td>
+<td>Forbidden</td>
+</tr>
+<tr>
+<td>UNAVAILABLE</td>
+<td>503</td>
+<td>Bad Request</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="sec--Error.-" secid="7.2">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec--Error.-">7.2</a></span>业务错误</h2>
+<section id="sec-Query-" secid="7.2.1">
+<h3><span class="spec-secid" title="link to this section"><a href="#sec-Query-">7.2.1</a></span>Query错误</h3>
+<p>任何一个<code>query</code> 都可能产生错误，错误有多个原因，因此错误应该在 <code>error</code>数组中。必须包含三个元素</p>
+<ol>
+<li>message: 代表错误的原因 </li>
+<li>locations: 代表错误的位置/行</li>
+<li>path: 代表错误的path </li>
+</ol>
+<p>可选的，我们可以将一些辅助定位业务错误的因素，如<span class="spec-t">错误码</span>来添加在 <code>extensions</code>中。</p>
+<p>完整的例子如下：</p>
+<pre><code>{
+  "errors": [
+    {
+      "message": "Name for character with ID 1002 could not be fetched.",
+      "locations": [ { "line": 6, "column": 7 } ],
+      "path": [ "hero", "heroFriends", 1, "name" ],
+      "extensions": {
+        "code": "CAN_NOT_FETCH_BY_ID",
+        "timestamp": "Fri Feb 9 14:33:09 UTC 2018"
+      }
+    }
+  ]
+}
+</code></pre>
+</section>
+<section id="sec-Mutation-" secid="7.2.2">
+<h3><span class="spec-secid" title="link to this section"><a href="#sec-Mutation-">7.2.2</a></span>Mutation错误</h3>
+<p>Mutation的错误最好包含具体的错误原因，一次Mutation中 有很多字段，当发生错误的时候，需要定位到具体哪一个字段导致了错误的发生（当然有可能是多个字段导致）。 因此，Mutation的错误应该定义在Type中。也就是Payload里。</p>
+<p>它必须包含三个字段：</p>
+<ol>
+<li>field:[String!]</li>
+<li>message String!</li>
+<li>code:Code 所以导致错误的字段都应该出现在field 数组里。</li>
+</ol>
+</section>
+</section>
+</section>
+<section id="sec--RateLimiter" secid="8">
+<h1><span class="spec-secid" title="link to this section"><a href="#sec--RateLimiter">8</a></span>限速&rarr;RateLimiter</h1>
+<p>GraphQL是一张图，用户端以<code>DSL</code>的形式来描述对 资源的访问与变更，若不加限制，恶意的客户端很容易构造一个极负责的查询来消耗服务端CPU/内存资源。 GraphQL 针对访问高并发性能优先的程序和资源优先，可以采用如下几种限速算法</p>
+<ul>
+<li>Time-based 算法</li>
+<li>Scope 算法</li>
+</ul>
+<section id="sec-Time-based-" secid="8.1">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Time-based-">8.1</a></span>Time-based 算法</h2>
+<div class="spec-todo">
+</div>
+</section>
+<section id="sec-Scope-" secid="8.2">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Scope-">8.2</a></span>Scope 算法</h2>
+<p>每一个对象都有不同的<code>scope</code>,比如 查询一个<code>object</code> 需要花费 <code>1</code>,查询一个分页，返回10个对象，则应该是 <code>1+10</code> 通过设置一个全局最大值，来限制用户的查询和保护系统资源。</p>
+<div id="note-861e0" class="spec-note">
+<a href="#note-861e0">Note</a>
+ 每一个查询都需要消耗CPU和内存资源，因此必须</div>
+<p>下面是一张推荐的表，对于每一种类型的对象成本做了预估。</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Scalar</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Enum</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Object</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Interface</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Union</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Connections</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Mutation Field</td>
+<td>10</td>
+</tr>
+</tbody>
+</table>
+<div id="note-d4b1f" class="spec-note">
+<a href="#note-d4b1f">Note</a>
+ 一切都是为了保护系统资源，在特定的场景下，上面的分值可以自行调整。</div>
+</section>
+</section>
+<section id="sec--Document" secid="9">
+<h1><span class="spec-secid" title="link to this section"><a href="#sec--Document">9</a></span>文档&rarr;Document</h1>
+<section id="sec--Document.-" secid="9.1">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec--Document.-">9.1</a></span>自省</h2>
+<p>graphQL 可<a href="https://graphql.org/learn/introspection/">自省</a>. 这意味着，可以通过<code>graphql</code> 的查询语法来观察自身的结构，包括：字段定义、描述、类型 因此，通过自省指令可以观察<code>schema</code>本身的结构。</p>
+<p>比如如下的查询，可以观察到 <code>TypeName</code> 的 <code>kind</code> 信息</p>
+<pre><code>{
+  __type(name: "TypeName") {
+    name
+    kind
+  }
+}
+
+</code></pre>
+</section>
+<section id="sec-graphiQL" secid="9.2">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-graphiQL">9.2</a></span>graphiQL</h2>
+<p><a href="https://github.com/graphql/graphiql">GraphiQL</a> 是一个in-web 的工具，我们可以通过一个<code>endpoint</code>，通过自省就能看到文档。它非常有效，可以发起请求。 因此强烈推荐在开发过程中使用 <code>graphiql</code> 来进行测试。 它也可以部署在外部，当需要将<code>graphql</code> api 开放出去的时候，最好提供一个<code>graphiql</code>。</p>
+</section>
+<section id="sec--Document.-" secid="9.3">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec--Document.-">9.3</a></span>文档多语言</h2>
+<p>有些应用需要提供多语言版本的文档.</p>
+<div class="spec-todo">
+</div>
+</section>
+</section>
+<section id="sec--Do" secid="10">
+<h1><span class="spec-secid" title="link to this section"><a href="#sec--Do">10</a></span>实践&rarr;Do</h1>
+<section id="sec-ID" secid="10.1">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-ID">10.1</a></span>ID</h2>
+<p>ID 可以在一个 <var data-name="endpoint">endpoint</var> 中代表唯一的资源。客户端可以用来做缓存。 有如下两种简单的方式来构建ID</p>
+<section id="sec-encodeString" secid="10.1.1">
+<h3><span class="spec-secid" title="link to this section"><a href="#sec-encodeString">10.1.1</a></span>encodeString</h3>
+<p>通过一个<code>base64</code>编码的字符串来代表ID是最简单的。 但应该尽可能的考虑查询性能，当有多个数据源的时候，如果ID不无法分析出领域，则额外维护一个字典表来映射。因此适当的做法是带有一个前缀来快速识别子域.</p>
+<div class="spec-production" id="Example">
+<span class="spec-nt"><a href="#Example" data-name="Example">Example</a></span><div class="spec-rhs"><span class="spec-nt"><span data-name="U_aGVsbG8gd29ybGQ">U_aGVsbG8gd29ybGQ</span></span><span class="spec-t">=</span></div>
+</div>
+<div id="note-3219c" class="spec-note">
+<a href="#note-3219c">Note</a>
+ 不建议采用随机字符串来做graphql的<code>ID</code>.尤其是在拥有大量的子域的时候。 在上面的例子中, <code>U_</code> 代表一种前缀，例如代表 <code>User</code>。 在数据集群的时候，可以快速的定位到数据的位置。</div>
+</section>
+<section id="sec-gid" secid="10.1.2">
+<h3><span class="spec-secid" title="link to this section"><a href="#sec-gid">10.1.2</a></span>gid</h3>
+<p>gid 是一套<code>ID</code> 规约（协议）,通过 <code>gid</code> 我们可以定义唯一的资源。</p>
+<p><code>ID</code> 本身代表唯一资源，并不要求资源是可读的。 因此在同一个<code>graph</code>中采用一套约束，可以带来很多优势。</p>
+<ul>
+<li><code>gid</code> 可读 </li>
+<li><code>gid</code> 在图中唯一</li>
+</ul>
+<section id="sec-gid.-" secid="10.1.2.1">
+<h4><span class="spec-secid" title="link to this section"><a href="#sec-gid.-">10.1.2.1</a></span>协议</h4>
+<p><code>gid://$company/$domain/$id</code></p>
+<p>协议分为三部分：</p>
+<ol>
+<li><code>gid://</code> 代表gid协议</li>
+<li>$company 固定值 代表公司</li>
+<li>$domain 代表领域 如 <code>Product</code> 注意 首字母大写驼峰</li>
+<li>$id 代表资源的唯一ID 注意！ $id <em>必须</em> 在领域内唯一，比如 123 在Product 内代表 ID为 123的商品 (不能包含其他含义)。</li>
+</ol>
+<div id="note-a2b76" class="spec-note">
+<a href="#note-a2b76">Note</a>
+ $id 建议 是数字，且长度不能超过64位。</div>
+<div class="spec-production" id="Example">
+<span class="spec-nt"><a href="#Example" data-name="Example">Example</a></span><div class="spec-rhs"><span class="spec-t">gid://shopline/Product/1</span></div>
+</div>
+<section id="sec-gid.-.-" secid="10.1.2.1.1">
+<h5><span class="spec-secid" title="link to this section"><a href="#sec-gid.-.-">10.1.2.1.1</a></span>子域</h5>
+<p>真实场景中，我们的团队往往分为子域。因此 <code>$domain</code> 可以具体到子域。</p>
+<p>有两种方式，</p>
+<p>通过驼峰</p>
+<div class="spec-production" id="Example">
+<span class="spec-nt"><a href="#Example" data-name="Example">Example</a></span><div class="spec-rhs"><span class="spec-t">gid://company/ProductVersion/1</span></div>
+</div>
+<p>通过<code>::</code></p>
+<div class="spec-production" id="Example">
+<span class="spec-nt"><a href="#Example" data-name="Example">Example</a></span><div class="spec-rhs"><span class="spec-t">gid://company/Product::Version/1</span></div>
+</div>
+<div id="note-b3236" class="spec-note">
+<a href="#note-b3236">Note</a>
+ 可以选择其中的其中的任意一种。驼峰是shopify的风格，<code>::</code> 是gitlab 的风格。</div>
+</section>
+<section id="sec-gid.-.-" secid="10.1.2.1.2">
+<h5><span class="spec-secid" title="link to this section"><a href="#sec-gid.-.-">10.1.2.1.2</a></span>场景</h5>
+<ol>
+<li>Node 节点</li>
+</ol>
+<div id="note-cc2ac" class="spec-note">
+<a href="#note-cc2ac">Note</a>
+ 假如你要返回一个Node节点，作为graphQL的output. <code> node(id:ID):Node!</code> 当为<code>node</code>配置字段解析的时候，我们可以根据<code>id</code>的<code>gid</code>约束来获取到查询的$domain,然后获取到对应domain的资源。</div>
+</section>
+</section>
+</section>
+</section>
+<section id="sec-node-nodes" secid="10.2">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-node-nodes">10.2</a></span>node &amp; nodes</h2>
+<p>node 可以作为一种最佳实践，用来表达一系列资源的公共抽象。尤其是当子域非常多的时候，我们不可能为每一个子域名都构建一个查询。 因此，可以考虑使用node来构建 graphQL 的核心资源查询能力</p>
+<section id="sec-Node" secid="10.2.1">
+<h3><span class="spec-secid" title="link to this section"><a href="#sec-Node">10.2.1</a></span>Node</h3>
+<pre><code>
+interface Node{
+    id:ID!
+}
+
+</code></pre>
+<section id="sec-Node-" secid="10.2.1.1">
+<h4><span class="spec-secid" title="link to this section"><a href="#sec-Node-">10.2.1.1</a></span>Node支撑域</h4>
+<p>Node 可以作为许多子域的抽象返回，用来补充graphql的能力。</p>
+<p>比如 有 <code>Checkout</code> <code>Product</code> <code>Cart</code> <code>Order</code> 四个子域。 采用Node，我们可以提供一个这样的查询</p>
+<div class="spec-production" id="Example">
+<span class="spec-nt"><a href="#Example" data-name="Example">Example</a></span><div class="spec-rhs"><span class="spec-t">type</span><span class="spec-t">node(id:ID):Node!</span></div>
+</div>
+<p>我们可以采用如下的查询来获取<code>Product</code></p>
+<pre><code>{
+  node(id:"$productId"){
+ 	... on Product {
+    id
+  }   
+  }
+}
+
+</code></pre>
+<p>当需要查询 <code>Cart</code>时候， 我们可以采用如下的形式调用</p>
+<pre><code>{
+  node(id:"$cartId"){
+ 	... on Cart {
+    id
+  }   
+  }
+}
+
+</code></pre>
+<p>仅仅一个<code>node</code> 字段，就可以查询很多子域的数据。</p>
+</section>
+</section>
+</section>
+<section id="sec--Scalar" secid="10.3">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec--Scalar">10.3</a></span>自定义Scalar</h2>
+<p>Scalar是基本类型，自定义Scalar的时候必须非常小心，切勿包含业务含义。</p>
+<p>判断一个类型是否可以被定义成Scalar的要素如下</p>
+<ol>
+<li>如果这个Scalar脱离当前<var data-name="graph">graph</var>仍旧有含义，则可以定义，如 <code>JSON</code> <code>HTML</code></li>
+<li>如果这个Scalar在当前<var data-name="graphq">graphq</var>中可以被共享且没有ID，则可以定义， 如 <code>Money</code></li>
+<li>这个值本身可以被非JSON的 简单字面量表达</li>
+</ol>
+<div id="note-f228d" class="spec-note">
+<a href="#note-f228d">Note</a>
+ 比如一个 <code>UUID</code> 的字面量表达是 <code>c8e75cef-75d3-9f35-ca14-9a6de31bc745</code> 而一个<code>User</code> 的字面量可能是 <code>{"id":1,"name":"Leslie"}</code> 因此<code>User</code> 不能被定义为Scalar</div>
+<p>除此之外，不应该将其定义成为Scalar</p>
+</section>
+</section>
+<section id="index" secid="index" class="spec-index">
+<h1>
+<span class="spec-secid" title="link to the index"><a href="#index">§</a></span>Index</h1>
+<ol>
+<li><a href="#Example">Example</a></li>
+</ol>
+</section>
+</article>
+<footer>
+Written in <a href="https://spec-md.com" target="_blank">Spec Markdown</a>.</footer>
+<input hidden class="spec-sidebar-toggle" type="checkbox" id="spec-sidebar-toggle" aria-hidden /><label for="spec-sidebar-toggle" aria-hidden><div class="spec-sidebar-button">&#x2630;</div></label>
+<div class="spec-sidebar" aria-hidden>
+<div class="spec-toc">
+<div class="title"><a href="#">GraphQL in Shopline Spec</a></div>
+<ol><li id="_sidebar_1"><a href="#sec--Type"><span class="spec-secid">1</span>类型&rarr;Type</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_1" /><label for="_toggle_1"></label>
+<ol>
+<li id="_sidebar_1.1"><a href="#sec--Type-Definition"><span class="spec-secid">1.1</span>类型定义&rarr;Type Definition</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_1.1" /><label for="_toggle_1.1"></label>
+<ol>
+<li id="_sidebar_1.1.1"><a href="#sec-Scalar"><span class="spec-secid">1.1.1</span>Scalar</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_1.1.1" /><label for="_toggle_1.1.1"></label>
+<ol>
+<li id="_sidebar_1.1.1.1"><a href="#sec--Statute"><span class="spec-secid">1.1.1.1</span>约束&rarr;Statute</a></li>
+</ol>
+</li>
+<li id="_sidebar_1.1.2"><a href="#sec-Object"><span class="spec-secid">1.1.2</span>Object</a></li>
+<li id="_sidebar_1.1.3"><a href="#sec-Union-Interface"><span class="spec-secid">1.1.3</span>Union &amp; Interface</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_1.1.3" /><label for="_toggle_1.1.3"></label>
+<ol>
+<li id="_sidebar_1.1.3.1"><a href="#sec-Union"><span class="spec-secid">1.1.3.1</span>Union</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_1.1.3.1" /><label for="_toggle_1.1.3.1"></label>
+<ol>
+<li id="_sidebar_1.1.3.1.1"><a href="#sec-Union.-"><span class="spec-secid">1.1.3.1.1</span>定义</a></li>
+</ol>
+</li>
+<li id="_sidebar_1.1.3.2"><a href="#sec-Interface"><span class="spec-secid">1.1.3.2</span>Interface</a></li>
+</ol>
+</li>
+<li id="_sidebar_1.1.4"><a href="#sec-Enum"><span class="spec-secid">1.1.4</span>Enum</a></li>
+<li id="_sidebar_1.1.5"><a href="#sec-Input-Object"><span class="spec-secid">1.1.5</span>Input Object</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_1.1.5" /><label for="_toggle_1.1.5"></label>
+<ol>
+<li id="_sidebar_1.1.5.1"><a href="#sec-Input-Object.-"><span class="spec-secid">1.1.5.1</span>约束</a></li>
+</ol>
+</li>
+<li id="_sidebar_1.1.6"><a href="#sec-Payload"><span class="spec-secid">1.1.6</span>Payload</a></li>
+<li id="_sidebar_1.1.7"><a href="#sec--Type-Definition.Connection"><span class="spec-secid">1.1.7</span>Connection</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li id="_sidebar_2"><a href="#sec--Graph"><span class="spec-secid">2</span>图&rarr;Graph</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_2" /><label for="_toggle_2"></label>
+<ol>
+<li id="_sidebar_2.1"><a href="#sec--Graph.-"><span class="spec-secid">2.1</span>图的上下文</a></li>
+<li id="_sidebar_2.2"><a href="#sec--Graph.-"><span class="spec-secid">2.2</span>场景</a></li>
+</ol>
+</li>
+<li id="_sidebar_3"><a href="#sec--Domain"><span class="spec-secid">3</span>领域&rarr;Domain</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_3" /><label for="_toggle_3"></label>
+<ol>
+<li id="_sidebar_3.1"><a href="#sec--Domain.-"><span class="spec-secid">3.1</span>聚合根</a></li>
+<li id="_sidebar_3.2"><a href="#sec--Domain.-"><span class="spec-secid">3.2</span>领域实体</a></li>
+<li id="_sidebar_3.3"><a href="#sec--Domain.-"><span class="spec-secid">3.3</span>值对象</a></li>
+</ol>
+</li>
+<li id="_sidebar_4"><a href="#sec--Connections"><span class="spec-secid">4</span>分页&rarr;Connections</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_4" /><label for="_toggle_4"></label>
+<ol>
+<li id="_sidebar_4.1"><a href="#sec--Connections.Connection"><span class="spec-secid">4.1</span>Connection</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_4.1" /><label for="_toggle_4.1"></label>
+<ol>
+<li id="_sidebar_4.1.1"><a href="#sec--Connections.Connection.-"><span class="spec-secid">4.1.1</span>类型结构</a></li>
+</ol>
+</li>
+<li id="_sidebar_4.2"><a href="#sec--Connections.-"><span class="spec-secid">4.2</span>分页增强</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_4.2" /><label for="_toggle_4.2"></label>
+<ol>
+<li id="_sidebar_4.2.1"><a href="#sec-query"><span class="spec-secid">4.2.1</span>query</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_4.2.1" /><label for="_toggle_4.2.1"></label>
+<ol>
+<li id="_sidebar_4.2.1.1"><a href="#sec-query.-"><span class="spec-secid">4.2.1.1</span>语法分析</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_4.2.1.1" /><label for="_toggle_4.2.1.1"></label>
+<ol>
+<li id="_sidebar_4.2.1.1.1"><a href="#sec-query.-.-"><span class="spec-secid">4.2.1.1.1</span>实践</a></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li id="_sidebar_5"><a href="#sec--Permission"><span class="spec-secid">5</span>权限&rarr;Permission</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_5" /><label for="_toggle_5"></label>
+<ol>
+<li id="_sidebar_5.1"><a href="#sec--Permission.-"><span class="spec-secid">5.1</span>权限的校验</a></li>
+</ol>
+</li>
+<li id="_sidebar_6"><a href="#sec--Version"><span class="spec-secid">6</span>版本&rarr;Version</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_6" /><label for="_toggle_6"></label>
+<ol>
+<li id="_sidebar_6.1"><a href="#sec--Version.-"><span class="spec-secid">6.1</span>版本的名称</a></li>
+<li id="_sidebar_6.2"><a href="#sec--Version.-"><span class="spec-secid">6.2</span>版本递增约束</a></li>
+<li id="_sidebar_6.3"><a href="#sec--Version.-"><span class="spec-secid">6.3</span>兼容性</a></li>
+</ol>
+</li>
+<li id="_sidebar_7"><a href="#sec--Error"><span class="spec-secid">7</span>错误&rarr;Error</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_7" /><label for="_toggle_7"></label>
+<ol>
+<li id="_sidebar_7.1"><a href="#sec-Http"><span class="spec-secid">7.1</span>Http</a></li>
+<li id="_sidebar_7.2"><a href="#sec--Error.-"><span class="spec-secid">7.2</span>业务错误</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_7.2" /><label for="_toggle_7.2"></label>
+<ol>
+<li id="_sidebar_7.2.1"><a href="#sec-Query-"><span class="spec-secid">7.2.1</span>Query错误</a></li>
+<li id="_sidebar_7.2.2"><a href="#sec-Mutation-"><span class="spec-secid">7.2.2</span>Mutation错误</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li id="_sidebar_8"><a href="#sec--RateLimiter"><span class="spec-secid">8</span>限速&rarr;RateLimiter</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_8" /><label for="_toggle_8"></label>
+<ol>
+<li id="_sidebar_8.1"><a href="#sec-Time-based-"><span class="spec-secid">8.1</span>Time-based 算法</a></li>
+<li id="_sidebar_8.2"><a href="#sec-Scope-"><span class="spec-secid">8.2</span>Scope 算法</a></li>
+</ol>
+</li>
+<li id="_sidebar_9"><a href="#sec--Document"><span class="spec-secid">9</span>文档&rarr;Document</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_9" /><label for="_toggle_9"></label>
+<ol>
+<li id="_sidebar_9.1"><a href="#sec--Document.-"><span class="spec-secid">9.1</span>自省</a></li>
+<li id="_sidebar_9.2"><a href="#sec-graphiQL"><span class="spec-secid">9.2</span>graphiQL</a></li>
+<li id="_sidebar_9.3"><a href="#sec--Document.-"><span class="spec-secid">9.3</span>文档多语言</a></li>
+</ol>
+</li>
+<li id="_sidebar_10"><a href="#sec--Do"><span class="spec-secid">10</span>实践&rarr;Do</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_10" /><label for="_toggle_10"></label>
+<ol>
+<li id="_sidebar_10.1"><a href="#sec-ID"><span class="spec-secid">10.1</span>ID</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_10.1" /><label for="_toggle_10.1"></label>
+<ol>
+<li id="_sidebar_10.1.1"><a href="#sec-encodeString"><span class="spec-secid">10.1.1</span>encodeString</a></li>
+<li id="_sidebar_10.1.2"><a href="#sec-gid"><span class="spec-secid">10.1.2</span>gid</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_10.1.2" /><label for="_toggle_10.1.2"></label>
+<ol>
+<li id="_sidebar_10.1.2.1"><a href="#sec-gid.-"><span class="spec-secid">10.1.2.1</span>协议</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_10.1.2.1" /><label for="_toggle_10.1.2.1"></label>
+<ol>
+<li id="_sidebar_10.1.2.1.1"><a href="#sec-gid.-.-"><span class="spec-secid">10.1.2.1.1</span>子域</a></li>
+<li id="_sidebar_10.1.2.1.2"><a href="#sec-gid.-.-"><span class="spec-secid">10.1.2.1.2</span>场景</a></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li id="_sidebar_10.2"><a href="#sec-node-nodes"><span class="spec-secid">10.2</span>node &amp; nodes</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_10.2" /><label for="_toggle_10.2"></label>
+<ol>
+<li id="_sidebar_10.2.1"><a href="#sec-Node"><span class="spec-secid">10.2.1</span>Node</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_10.2.1" /><label for="_toggle_10.2.1"></label>
+<ol>
+<li id="_sidebar_10.2.1.1"><a href="#sec-Node-"><span class="spec-secid">10.2.1.1</span>Node支撑域</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li id="_sidebar_10.3"><a href="#sec--Scalar"><span class="spec-secid">10.3</span>自定义Scalar</a></li>
+</ol>
+</li>
+<li id="_sidebar_index"><a href="#index"><span class="spec-secid">§</span>Index</a></li>
+</ol>
+</div>
+</div>
+</body>
+</html>

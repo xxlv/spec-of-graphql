@@ -1,0 +1,16 @@
+{
+  "name": "graphql-spec-md-in-shopline",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "b": "spec-md ./md/*.md > ./out/index.html",
+    "live":"live-server --open=out --watch=./out/index.html"
+  },
+
+  "devDependencies": {
+    "spec-md": "^3.0.2",
+    "live-server": "^1.2.0"
+
+  }
+}
